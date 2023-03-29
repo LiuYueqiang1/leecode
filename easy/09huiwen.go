@@ -51,7 +51,56 @@ func isPalindrome(x int) bool {
 
 	return false
 }
+
+func isPalindrome2(x int) bool {
+	if x < 0 {
+		return false
+	}
+	var y = make([]int, 0, 10)
+	for x > 0 {
+		y = append(y, x%10)
+		x = x / 10
+	}
+	fmt.Println(len(y))
+	j := len(y) - 1
+	m := 0
+	if len(y) <= 1 {
+		return true
+	}
+	for i := 0; i < len(y)/2; i++ {
+		fmt.Println(y[i], y[j])
+		if y[i] == y[j] {
+			m++
+		}
+		//fmt.Println(j)
+		if m == len(y)/2 {
+			return true
+		}
+		j--
+	}
+	return false
+}
+
+func isPalindrome3(x int) bool {
+	ans := 0
+	for num, i := x, 0; num > 0; {
+		ans = ans*10 + num%10
+		num /= 10
+		i++
+	}
+	return ans == x
+}
+func isPalindrome4(x int) bool {
+	ans := 0
+	for num := x; num > 0; {
+		ans = ans*10 + num%10
+		num = num / 10
+	}
+	return ans == x
+}
 func main() {
-	pan := isPalindrome(3125655213)
-	fmt.Println(pan)
+	//pan := isPalindrome(31255213)
+	//fmt.Println(pan)
+	t := isPalindrome4(1112111)
+	fmt.Println(t)
 }

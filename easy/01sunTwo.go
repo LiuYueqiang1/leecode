@@ -21,19 +21,36 @@ func twoSum(nums []int, target int) []int {
 	//这个代码有一个缺点，就是2 5 5 1 ，target=10时输出的是1 1，而不是 1 2
 }
 func twoSum2(nums []int, target int) []int {
-	m := make(map[int]int, 0)
-	for i := 0; i < len(nums); i++ {
-		if val, exist := m[nums[i]]; exist {
-			return []int{val, i}
+
+	for i, v := range nums {
+		for j := i + 1; j < len(nums); j++ { //j:=i+1从索引的下一个算，这样就不会索引到本身 注意j < len(nums)，而不是j <=len(nums)
+			if v+nums[j] == target {
+				fmt.Println([]int{i, j})
+				return []int{i, j}
+			}
 		}
-		m[target-nums[i]] = i
 	}
 	return nil
 }
+
+// 哈希表
+func twoSum3(nums []int, target int) []int {
+	hashTable := map[int]int{}
+	for i, x := range nums {
+		if p, ok := hashTable[target-x]; ok {
+			return []int{p, i}
+		}
+		hashTable[x] = i
+	}
+
+	return nil
+}
+
 func main() {
 	nums := []int{2, 5, 5, 11}
 	target := 10
 	//twoSum(nums, target)
-	twoSum2(nums, target)
+	//twoSum2(nums, target)
+	twoSum3(nums, target)
 
 }
