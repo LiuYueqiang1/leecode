@@ -61,23 +61,24 @@ func removeElements(head *ListNode, val int) *ListNode {
 }
 func main() {
 	head := &ListNode{}
+	fmt.Println("test:", head == nil)
 	v1 := &ListNode{
-		Val: 1,
+		Val: 6,
 	}
 	v2 := &ListNode{
-		Val: 2,
+		Val: 6,
 	}
 	v3 := &ListNode{
 		Val: 6,
 	}
 	v4 := &ListNode{
-		Val: 3,
+		Val: 6,
 	}
 	v5 := &ListNode{
-		Val: 4,
+		Val: 6,
 	}
 	v6 := &ListNode{
-		Val: 5,
+		Val: 6,
 	}
 	v7 := &ListNode{
 		Val: 6,
