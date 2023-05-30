@@ -40,7 +40,6 @@ func listElements(head *ListNode) {
 		}
 
 	}
-
 }
 
 func removeElements(head *ListNode, val int) *ListNode {
