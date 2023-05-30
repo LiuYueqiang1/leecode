@@ -5,23 +5,25 @@ import (
 )
 
 // 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
-func reverseList(head *ListNode2) *ListNode2 {
-	pre := head
-	cur := head
+func reverseList(head *ListNode2) {
+	//pre := head
 	temp := head
-	tep := head.Next
-	for temp != nil {
+	num := head.Next
+
+	tep := head.Next.Next
+	for temp.Next != nil {
 		temp = temp.Next
 	}
-	pre.Next = temp
+	head.Next.Next = nil //将最后一个节点的下一个为nil
+	head.Next = temp
 
 	for tep != nil {
-		num := tep
-		tep = tep.Next
-		num.Next = cur
-		cur = num
+		cur := tep.Next
+		tep.Next = num
+		num = tep
+		tep = cur
 	}
-	return pre
+
 }
 
 type ListNode2 struct {
@@ -86,6 +88,6 @@ func main() {
 
 	listElements2(dummyHead)
 	fmt.Println()
-	w := reverseList(dummyHead)
-	listElements2(w)
+	reverseList(dummyHead)
+	listElements2(dummyHead)
 }
