@@ -77,3 +77,22 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return dummyHead.Next
 
 }
+
+// 解法2：双指针法  slow和fast 节点
+func removeNthFromEnd2(head *ListNode, n int) *ListNode {
+	dummyHead := &ListNode{}
+	dummyHead.Next = head
+	cur := head
+	prev := dummyHead
+	i := 1
+	for cur != nil {
+		cur = cur.Next
+		//先允许fast走n步，prev才走
+		if i > n {
+			prev = prev.Next
+		}
+		i++
+	}
+	prev.Next = prev.Next.Next
+	return dummyHead.Next
+}
