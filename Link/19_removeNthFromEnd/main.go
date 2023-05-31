@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ListNode struct {
 	Val  int
@@ -45,7 +47,7 @@ func main() {
 	addList(v1, v4)
 	viewList(v1)
 	fmt.Println()
-	rr := removeNthFromEnd(v1, 1)
+	rr := removeNthFromEnd(v1, 2)
 	viewList(rr)
 }
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
@@ -57,10 +59,21 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 		num++
 		temp = temp.Next
 	}
-	temp = head
-	for i := 1; i < num-n; i++ {
-		temp = temp.Next
+	if n > num {
+		fmt.Println("您删除的值不存在")
+		return head
+	} else if n == 1 && num == 1 {
+		head = nil
+		return head
 	}
-	temp.Next = temp.Next.Next
-	return head
+	//temp = head
+	pre := dummyHead
+	for i := 0; i < num-n; i++ {
+		pre = pre.Next
+	}
+	pre.Next = pre.Next.Next
+	//最后返回的一定要是dummyHead.Next
+	//不然如果是 head 的话就失去了 dummyHead 的意义
+	return dummyHead.Next
+
 }
