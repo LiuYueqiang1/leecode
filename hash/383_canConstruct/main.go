@@ -26,10 +26,10 @@ func canConstruct2(ransomNote string, magazine string) bool {
 }
 func canConstruct(ransomNote string, magazine string) bool {
 	set := make([]int, 36)
-	for _, v := range ransomNote {
+	for _, v := range magazine {
 		set[v-'a']++
 	}
-	for _, v := range magazine {
+	for _, v := range ransomNote {
 		set[v-'a']--
 		if set[v-'a'] < 0 {
 			return false
