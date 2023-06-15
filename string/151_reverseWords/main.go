@@ -17,42 +17,51 @@ import "fmt"
 // 输出: "example good a"
 // 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
 func reverseWords(s string) string {
-	//1.使用双指针删除冗余的空格
-	slowIndex, fastIndex := 0, 0
+	//slow 是过滤后的，fast是原来的指针
+	slowindex, fastindex := 0, 0
 	b := []byte(s)
-	//删除头部冗余空格
-	for len(b) > 0 && fastIndex < len(b) && b[fastIndex] == ' ' {
-		fastIndex++
+	//删除头部空格
+	for len(b) > 0 && b[fastindex] == ' ' && fastindex < len(b) {
+		fastindex++ //将 fastindex 移到第一个字符位
 	}
-	//删除单词间冗余空格   对后面的也有用
-	for ; fastIndex < len(b); fastIndex++ {
-		if fastIndex-1 > 0 && b[fastIndex-1] == b[fastIndex] && b[fastIndex] == ' ' {
+	//删除单词直接的冗余空格
+	for ; fastindex < len(b); fastindex++ {
+		if fastindex-1 > 0 && b[fastindex-1] == b[fastindex] && b[fastindex] == ' ' {
 			continue
 		}
-		b[slowIndex] = b[fastIndex]
-		//最后一次 slow=12
-		//slow ++ 退出
-		slowIndex++
-		// 此时fast= 15
-		// slow =13
-		// 12 =‘ ’   13=‘ ’
+		b[slowindex] = b[fastindex]
+		//最后一次slow=12
+		slowindex++
+		//slow=13
+		//此时b[12]=' ' , b[13]=' '
 	}
-	//删除尾部冗余空格
-	if slowIndex-1 > 0 && b[slowIndex-1] == ' ' {
-		b = b[:slowIndex-1] //切片是左包含右不包含
+	// 删除末尾的空格
+	// 因为最后的时候slow++
+	// []切片是左包含右不包含
+	if slowindex-1 > 0 && b[slowindex-1] == ' ' {
+		b = b[:slowindex-1]
 	} else {
-		b = b[:slowIndex]
+		b = b[:slowindex]
 	}
-	//2.反转整个字符串
+	//反转整个字符串
 	reverse(&b, 0, len(b)-1)
-	//3.反转单个单词  i单词开始位置，j单词结束位置
+	//反转各个单词中的字符
+	//以‘ ’为界
+	//双指针
+
+	//1、将i，j=0
 	i := 0
 	for i < len(b) {
-		j := i
+		//2、将j=单词前的‘ ’
+		j := i //定一个第一层for循环内全局的，后面用
 		for ; j < len(b) && b[j] != ' '; j++ {
+			// 将j移动到‘ ’处
 		}
+		//3、i，j反转
 		reverse(&b, i, j-1)
+		//4、i=j 也来到‘ ’
 		i = j
+		//5、i+1 来到单词中的第一个字母的位置
 		i++
 	}
 	return string(b)
