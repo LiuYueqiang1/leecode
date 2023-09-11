@@ -15,7 +15,7 @@ func invertTree(node *TreeNode) *TreeNode {
 		return nil
 	}
 	node.Left, node.Right = node.Right, node.Left
-	invertTree(node.Left)
+	invertTree(node.Left) // 如果空了，此函数就返回
 	invertTree(node.Right)
 	return node
 }

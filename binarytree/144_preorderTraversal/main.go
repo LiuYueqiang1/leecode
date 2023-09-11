@@ -16,7 +16,22 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// 定义一个函数、调用这个函数即可
 func preorderTraversal(root *TreeNode) []int {
+	ret := make([]int, 0)
+	var pretree func(node *TreeNode)
+	pretree = func(node *TreeNode) {
+		if node != nil {
+			ret = append(ret, node.Val)
+			pretree(node.Left)
+			pretree(node.Right)
+		}
+	}
+	pretree(root)
+	return ret
+}
+
+func preorderTraversal2(root *TreeNode) []int {
 	var res = make([]int, 0)
 	var traversal func(node *TreeNode)
 	// 定义一个函数

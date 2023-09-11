@@ -26,7 +26,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// 前序遍历
+// 前序遍历 根左右
 func preorderTraversal(root *TreeNode) (res []int) {
 	var traversal func(node *TreeNode)
 	traversal = func(node *TreeNode) {
@@ -40,7 +40,7 @@ func preorderTraversal(root *TreeNode) (res []int) {
 	return res
 }
 
-// 中序遍历
+// 中序遍历 左根右
 func inorderTraversal(root *TreeNode) (res []int) {
 	var traversal func(node *TreeNode)
 	traversal = func(node *TreeNode) {
@@ -55,7 +55,7 @@ func inorderTraversal(root *TreeNode) (res []int) {
 	return res
 }
 
-// 后续遍历
+// 后续遍历 左右根
 func postorderTraversal(root *TreeNode) (res []int) {
 	var traversal func(node *TreeNode)
 	traversal = func(node *TreeNode) {
